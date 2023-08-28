@@ -1,81 +1,27 @@
-<div>
-<img src="projectLogo.png" width="500">
+# React + TypeScript + Vite
 
-<h3 align="center">Soroban Bitcoin Price Oracle</h3>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-  <p align="center"> Bitcoin Price Oracle on Soroban Stellar (Futurenet)</p>
-    - Live app: TBD<br/>
-    - Tutorial (article): https://dev.to/user1122/soroban-bitcoin-price-oracle-tutorial-3ldk<br/>
-    - Tutorial (video): TBD
-</div>
+Currently, two official plugins are available:
 
-## Soroban Bitcoin Price Oracle
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-TBD
+## Expanding the ESLint configuration
 
-## Built With
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Soroban smart contracts - https://soroban.stellar.org
-- React
-- IPFS Storage - https://thirdweb.com/dashboard/infrastructure/storage
-- Chakra UI - https://chakra-ui.com/
+- Configure the top-level `parserOptions` property like this:
 
+```js
+   parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+   },
+```
 
-## Getting Started
-
-### Prerequisites
-
-* **Node v18** - Install here: https://nodejs.org/en/download
-  
-* **Rust** - How to install Rust: 
-  [https://soroban.stellar.org/docs/getting-started/setup#install-rust](https://soroban.stellar.org/docs/getting-started/setup#install-rust)
-
-* **Soroban CLI** - How to install Soroban CLI: 
-  [https://soroban.stellar.org/docs/getting-started/setup#install-the-soroban-cli](https://soroban.stellar.org/docs/getting-started/setup#install-the-soroban-cli)
-  
-* **Stellar Account with test tokens on Futurenet** - How to create new wallet using soroban-cli & receive test tokens:
-  [https://soroban.stellar.org/docs/getting-started/deploy-to-futurenet#configure-an-identity](https://soroban.stellar.org/docs/getting-started/deploy-to-futurenet#configure-an-identity)
-
-* **Freighter Wallet** - Wallet extension for interact with the app. Link: https://www.freighter.app
-
-
-
-### Build, deploy & run the app frontend
-
-1. Clone this repository:
-   ```sh
-   git clone https://github.com/snowstorm134/SorobanCryptoOracle.git
-   ```
-  
-2. Install soroban-cli alias by running the following command:
- ```sh
-   cargo install_soroban
-   ```
-
-3. Run
-  ```sh
-   npm run setup
-   ```
-  It will do all actions (creating a new wallet, get test tokens, build and deploy all contracts using this wallet, create bind for typescript and also will install all node js packages). For more details, please check the guide.
-
-4. You will need to run a CRON task at every 5 minutes that will check if there is need to fetch the BTC price from external API and set it to contract.
-
-   The function is ready, you need only to put:
-   - Secret key of wallet (relayer) that will fetch BTC price from API and set it to smart contract;
-   - Contract address of deployed Oracle Contract;
-   - `API_KEY` from https://api-ninjas.com/api/cryptoprice (for free).
-     
-   To run the CRON task, go to `cron` dir and run:
-   ```sh
-   npm install
-   npm cron-script.js
-   ```
-  
-5. Run
-  ```sh
-   npm run dev
-   ```
- It will run the app frontend on port 3000 or other.
- 
-6. Open the app and start use it.
-  
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
