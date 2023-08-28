@@ -4,7 +4,7 @@
 <h3 align="center">Soroban Bitcoin Price Oracle</h3>
 
   <p align="center"> Bitcoin Price Oracle on Soroban Stellar (Futurenet)</p>
-    - Live app: TBD<br/>
+    - Live app: https://soroban-bitcoin-oracle.netlify.app<br/>
     - Tutorial (article): https://dev.to/user1122/soroban-bitcoin-price-oracle-tutorial-3ldk<br/>
     - Tutorial (video): TBD
 </div>
