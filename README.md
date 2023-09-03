@@ -46,19 +46,14 @@ TBD
    ```sh
    git clone https://github.com/snowstorm134/SorobanCryptoOracle.git
    ```
-  
-2. Install soroban-cli alias by running the following command:
- ```sh
-   cargo install_soroban
-   ```
 
-3. Run
+2. Run
   ```sh
    npm run setup
    ```
   It will do all actions (creating a new wallet, get test tokens, build and deploy all contracts using this wallet, create bind for typescript and also will install all node js packages). For more details, please check the guide.
 
-4. You will need to run a CRON task at every 5 minutes that will check if there is need to fetch the BTC price from external API and set it to contract.
+3. You will need to run a CRON task at every 5 minutes that will check if there is need to fetch the BTC price from external API and set it to contract.
 
    The function is ready, you need only to put:
    - Secret key of wallet (relayer) that will fetch BTC price from API and set it to smart contract;
@@ -68,14 +63,14 @@ TBD
    To run the CRON task, go to `cron` dir and run:
    ```sh
    npm install
-   npm cron-script.js
+   node cron-script.js
    ```
   
-5. Run
+4. Run
   ```sh
    npm run dev
    ```
  It will run the app frontend on port 3000 or other.
  
-6. Open the app and start use it.
+5. Open the app and start use it.
   
