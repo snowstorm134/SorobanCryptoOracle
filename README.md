@@ -53,7 +53,9 @@ TBD
    ```
     It will execute the `initialize.sh` bash script. *
 
-    > * If you are using Linux or Ubuntu OS, you may get the following error: `./initialize.sh: Permission denied`
+    > * If you are using Linux or Ubuntu OS, you may get the following error:
+    >   
+    >   `./initialize.sh: Permission denied`
 
     This error occurs when the shell script you’re trying to run doesn’t have the permissions to execute. To fix that, use this command:
 
