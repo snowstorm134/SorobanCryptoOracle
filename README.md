@@ -48,10 +48,32 @@ TBD
    ```
 
 2. Run
-  ```sh
+   ```sh
    npm run setup
    ```
-  It will do all actions (creating a new wallet, get test tokens, build and deploy all contracts using this wallet, create bind for typescript and also will install all node js packages). For more details, please check the guide.
+    It will execute the `initialize.sh` bash script. *
+
+    > * If you are using Linux or Ubuntu OS, you may get the following error: `./initialize.sh: Permission denied`
+
+    This error occurs when the shell script you’re trying to run doesn’t have the permissions to execute. To fix that, use this command:
+
+    ```sh
+    chmod +x initialize.sh
+    ```
+
+    and try again to run 
+    
+    ```sh
+    npm run setup
+    ```
+
+    The `initialize.sh` script will do all actions (creating a new wallet, get test tokens, build and deploy all contracts using this wallet, create bind for typescript and also will install all node js packages). For more details, please check the guide.
+
+
+
+
+
+
 
 3. You will need to run a CRON task at every 5 minutes that will check if there is need to fetch the BTC price from external API and set it to contract.
 
@@ -67,10 +89,10 @@ TBD
    ```
   
 4. Run
-  ```sh
+   ```sh
    npm run dev
    ```
- It will run the app frontend on port 3000 or other.
+   It will run the app frontend on port 3000 or other.
  
 5. Open the app and start use it.
   
