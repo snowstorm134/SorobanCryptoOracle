@@ -72,11 +72,6 @@ TBD
     The `initialize.sh` script will do all actions (creating a new wallet, get test tokens, build and deploy all contracts using this wallet, create bind for typescript and also will install all node js packages). For more details, please check the guide.
 
 
-
-
-
-
-
 3. You will need to run a CRON task at every 5 minutes that will check if there is need to fetch the BTC price from external API and set it to contract.
 
    The function is ready, you need only to put:
@@ -89,12 +84,35 @@ TBD
    npm install
    node cron-script.js
    ```
-  
-4. Run
+
+
+4. Correction of errors in typescript binding files
+
+    The `npm run setup` command from the previous steps also executed a script that creates typescript binding files for the smart contract. The fact is that at the moment, there is a certain error due to which the default created file generates an error in the frontend.
+
+    To fix this error you need to:
+    - Go to: `.soroban/oracle-contract/dist/esm/`;
+    - Open `index.js` file;
+    - Find all `export async function` and in each of them replace this part:
+
+      ```js
+      parseResultXdr: (xdr) => {
+          THIS_ROW_NEEDS_TO_BE_REPLACED
+      }
+      ```
+    
+      with this one:
+      ```js
+      parseResultXdr: (xdr) => {
+          return scValStrToJs(xdr);
+      }
+      ```
+
+6. Run
    ```sh
    npm run dev
    ```
    It will run the app frontend on port 3000 or other.
  
-5. Open the app and start use it.
+7. Open the app and start use it.
   
