@@ -74,16 +74,7 @@ export default function Layout() {
                             />
                         </Flex>
                         <Flex flex={{base: 1}} justify={{base: 'center', md: 'start'}}>
-                            <Box
-                                display={{base: 'none', md: 'block'}}
-                                p={2}
-                                fontSize={'sm'}
-                                fontWeight={500}
-                            >
-                                Logo
-                            </Box>
-
-                            <Flex display={{base: 'none', md: 'flex'}} ml={10}>
+                            <Flex display={{base: 'none', md: 'flex'}}>
                                 <DesktopNav/>
                             </Flex>
                         </Flex>
@@ -101,7 +92,7 @@ export default function Layout() {
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
-                <MobileNav/>
+                <MobileNav onToggleNavbar={onToggle}/>
             </Collapse>
 
             <Container mt={10} maxW='750'>
@@ -196,22 +187,22 @@ const DesktopSubNav = ({label, href, subLabel}: NavItem) => {
     )
 }
 
-const MobileNav = () => {
+const MobileNav = ({onToggleNavbar}: {onToggleNavbar: any}) => {
     return (
         <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{md: 'none'}}>
             {NAV_ITEMS.map((navItem) => (
-                <MobileNavItem key={navItem.label} {...navItem} />
+                <MobileNavItem onToggleNavbar={onToggleNavbar} key={navItem.label} {...navItem} />
             ))}
         </Stack>
     )
 }
 
-const MobileNavItem = ({label, children, href}: NavItem) => {
+const MobileNavItem = ({label, children, href, onToggleNavbar}: NavItem & {onToggleNavbar: any}) => {
     const {isOpen, onToggle} = useDisclosure()
 
     return (
         <Stack spacing={4} onClick={children && onToggle}>
-            <Link style={{cursor: 'pointer', width: '100%', height: '100%'}} to={href!}>
+            <Link onClick={onToggleNavbar} style={{cursor: 'pointer', width: '100%', height: '100%'}} to={href!}>
                 <Box
                     py={2}
                     justifyContent="space-between"
@@ -267,26 +258,16 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-    // {
-    //     label: 'Mint',
-    //     children: [
-    //         {
-    //             label: 'BTC',
-    //             subLabel: 'Btc mint',
-    //             href: '/mint/BTC_USDT',
-    //         },
-    //     ],
-    // },
     {
-        label: 'Mint',
-        href: '/mint/btc',
+        label: 'Home',
+        href: '/home',
     },
     {
         label: 'Donate',
         href: 'donation/btc',
     },
     {
-        label: 'Home',
-        href: '/home',
+        label: 'Mint BTC Tokens',
+        href: '/mint/btc',
     },
 ]

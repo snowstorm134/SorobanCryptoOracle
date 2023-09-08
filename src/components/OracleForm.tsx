@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Box,
     Button,
@@ -56,8 +56,6 @@ const OracleAddress = ({pairInfo}: { pairInfo: PairInfo | null }) => {
                     new_relayer_address: formData?.relayer
                 }, {fee: 1000, secondsToWait: 20, responseType: "full"})
 
-                console.log(txPairEpochInterval)
-
                 toast({
                     title: 'Update Relayer Successfully!',
                     description: "",
@@ -100,14 +98,19 @@ const OracleAddress = ({pairInfo}: { pairInfo: PairInfo | null }) => {
         <form onSubmit={handleSubmit(onSubmitRelayer)}>
             <Flex gap={3} align={'flex-start'}>
                 <FormControl isInvalid={!!errors.relayer}>
-                    <FormLabel htmlFor="address" fontWeight={'normal'}>
+                    <FormLabel
+                        fontSize="sm"
+                        fontWeight="md"
+                        color="gray.700"
+                        _dark={{color: 'gray.50'}}
+                    >
                         Change relayer address
                     </FormLabel>
                     <Input
                         disabled={isLoadingSetRelayer}
                         id="name" placeholder="New relayer address"
                         {...register('relayer', {
-                            required: 'This is required',
+                            required: 'This field is required',
                             minLength: {value: 1, message: 'Minimum length should be 1'},
                         })}
                     />
@@ -207,7 +210,7 @@ const OracleEpochInterval = ({pairInfo}: { pairInfo: PairInfo | null }) => {
                             fontSize={{sm: 'sm',}}
                             placeholder="Seconds"
                             {...register('time', {
-                                required: 'This is required',
+                                required: 'This field is required',
                                 min: {value: 300, message: 'Minimum 300 sec'},
                             })}
                         />
@@ -240,7 +243,7 @@ const OracleForm = ({pairInfo}: { pairInfo: PairInfo | null }) => {
     return (
         <Box
             bg={useColorModeValue('white', 'gray.800')}
-            boxShadow={'2xl'}
+            boxShadow={'md'}
             borderWidth="1px"
             rounded="lg"
             p={6}

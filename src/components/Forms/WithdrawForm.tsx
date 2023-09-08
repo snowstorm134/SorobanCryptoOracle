@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import * as contractDonation from 'donation-contract'
 import {
     Alert,
@@ -15,8 +15,10 @@ import {
 import {useAccount} from "@/hooks";
 import {EpochData, PairInfo} from "oracle-contract";
 
-function WithdrawForm({submitFormCallback, pairInfo, recipient}: {
+function WithdrawForm({submitFormCallback, pairInfo, recipient, myBalance, contractBalance}: {
     recipient: any,
+    myBalance: any,
+    contractBalance: any,
     submitFormCallback: any,
     pairInfo: PairInfo & EpochData | null
 }) {
@@ -26,34 +28,46 @@ function WithdrawForm({submitFormCallback, pairInfo, recipient}: {
 
     const onSubmitWithdraw4 = async (): Promise<void> => {
         if (account) {
-            setIsLoadingWithdraw(true)
-            try {
-                let txWithdraw = await contractDonation.withdraw({
-                    caller: account!.address
-                }, {fee: 100, secondsToWait: 20, responseType: "full"})
+            if (contractBalance > 0) {
+                setIsLoadingWithdraw(true)
+                try {
+                    let txWithdraw = await contractDonation.withdraw({
+                        caller: account!.address
+                    }, {fee: 100, secondsToWait: 20, responseType: "full"})
 
-                toast({
-                    title: 'Withdraw Successfully!',
-                    description: "",
-                    position: 'bottom-right',
-                    status: 'success',
-                    duration: 3000,
-                    isClosable: true,
-                    variant: 'subtle'
-                })
+                    toast({
+                        title: 'Withdraw Successfully!',
+                        description: "",
+                        position: 'bottom-right',
+                        status: 'success',
+                        duration: 3000,
+                        isClosable: true,
+                        variant: 'subtle'
+                    })
 
-                if (submitFormCallback) {
-                    setTimeout(() => {
-                        submitFormCallback()
-                    }, 1000)
+                    if (submitFormCallback) {
+                        setTimeout(() => {
+                            submitFormCallback()
+                        }, 1000)
+                    }
+
+                    setIsLoadingWithdraw(false)
+                } catch (e) {
+                    console.log(e)
+                    setIsLoadingWithdraw(false)
+                    toast({
+                        title: 'Withdraw Error!',
+                        description: "",
+                        position: 'bottom-right',
+                        status: 'error',
+                        duration: 3000,
+                        isClosable: true,
+                        variant: 'subtle'
+                    })
                 }
-
-                setIsLoadingWithdraw(false)
-            } catch (e) {
-                console.log(e)
-                setIsLoadingWithdraw(false)
+            } else {
                 toast({
-                    title: 'Withdraw Error!',
+                    title: 'Contract balance is 0',
                     description: "",
                     position: 'bottom-right',
                     status: 'error',
@@ -81,8 +95,8 @@ function WithdrawForm({submitFormCallback, pairInfo, recipient}: {
     return (
         <Box
             bg={useColorModeValue('white', 'gray.800')}
-            boxShadow={'2xl'}
-            borderWidth="1px"
+            boxShadow={'md'}
+            borderWidth="3px"
             rounded="lg"
             p={6}
         >
@@ -91,7 +105,7 @@ function WithdrawForm({submitFormCallback, pairInfo, recipient}: {
                     Withdraw
                 </Heading>
                 <Stack>
-                    {account?.address === recipient
+                    {(account?.address === recipient)
                         ? <Flex gap={3} align={'flex-end'}>
                             <Button
                                 onClick={onSubmitWithdraw4}

@@ -62,10 +62,10 @@ export default function PairCard({contract, callback, pairInfo, isLoadingPairInf
             <Stack
                 borderWidth="1px"
                 borderRadius="lg"
-                height={{sm: '250px', md: '350px'}}
+                // height={{sm: '250px', md: '350px'}}
                 direction={{base: 'column', sm: 'row'}}
                 bg={useColorModeValue('white', 'gray.900')}
-                boxShadow={'2xl'}
+                boxShadow={'md'}
                 w={'100%'}
                 padding={4}
             >
@@ -77,15 +77,15 @@ export default function PairCard({contract, callback, pairInfo, isLoadingPairInf
                         <Stack gap={1} align={'center'} justify={'center'} flex={1}>
                             <Image
                                 objectFit="cover"
-                                height={'80%'}
+                                height={{sm: '150px', md: '200px'}}
                                 src={
                                     'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png'
                                 }
                                 alt="#"
                             />
-                            <Text fontSize='xl' fontWeight='bold'>
-                                <Badge fontSize='0.8em' w={'max-content'}>
-                                    {Number(pairInfo?.value) / 10 ** 5}
+                            <Text fontSize='3xl' fontWeight='bold'>
+                                <Badge fontSize='1em' w={'max-content'}  colorScheme={'orange'}>
+                                    {Number(pairInfo?.value) / 10 ** 5} $
                                 </Badge>
                             </Text>
                         </Stack>
@@ -169,7 +169,7 @@ export default function PairCard({contract, callback, pairInfo, isLoadingPairInf
                                         _focus={{
                                             bg: 'blue.500',
                                         }}>
-                                        <Link style={{width: '100%'}} to={`/${pairInfo?.pair_name}`}>
+                                        <Link style={{fontSize: 20, width: '100%'}} to={`/${pairInfo?.pair_name}`}>
                                             Details
                                         </Link>
                                     </Button>

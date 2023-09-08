@@ -1,12 +1,12 @@
 import {Stack} from "@chakra-ui/react";
-import PairCard, {ItemCardContainer} from "./Pairs/PairCard.tsx";
+import PairCard, {ItemCardContainer} from "./PairCard.tsx";
 import * as contractOracleBtc from "oracle-contract";
 import OracleForm from "@/components/OracleForm.tsx";
 import {useEffect, useState} from "react";
 import {useAccount} from "@/hooks";
 import {EpochData, PairInfo} from "oracle-contract";
 
-const HomeDetails = ({contract}: { contract: typeof contractOracleBtc }) => {
+const PairDetails = ({contract}: { contract: typeof contractOracleBtc }) => {
     const account = useAccount()
     const [pairInfo, setPairInfo] = useState<PairInfo & EpochData | null>(null)
     const [isLoadingContractOwner, setIsLoadingContractOwner] = useState<boolean>(false)
@@ -21,7 +21,6 @@ const HomeDetails = ({contract}: { contract: typeof contractOracleBtc }) => {
                 epoch_nr: txPairInfo?.last_epoch
             })
             setPairInfo({...txPairInfo, ...txPairDataAtEpoch})
-            console.log({...txPairInfo, ...txPairDataAtEpoch})
             setIsLoadingPairInfo(false)
         } catch (e) {
             console.log(e)
@@ -64,4 +63,4 @@ const HomeDetails = ({contract}: { contract: typeof contractOracleBtc }) => {
     );
 }
 
-export default HomeDetails;
+export default PairDetails;
