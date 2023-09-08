@@ -1,5 +1,4 @@
 <div>
-<img src="projectLogo.png" width="500">
 
 <h3 align="center">Soroban Bitcoin Price Oracle</h3>
 
